@@ -10,80 +10,68 @@ public class Linklist {
 		first = null;
 	}
 
-	/*
-	 * public void ghifile() { insert("01", "Truong Cong Chuc\t", 9); insert("02",
-	 * "Nguyen Viet Duy Nam\t", 8); insert("03", "Phan Van Minh Hieu\t", 5);
-	 * obj.ghiFile(first); }
-	 */
-
 	public void docfile() {
 		first = obj.docFile("D:\\BT PhuXuan\\CTDL và GT\\thi.bin");
 	}
 
 	public void creatlist() {
-	    Scanner scanner = new Scanner(System.in);
-	    while (true) {
-	        String maSV = "";
-	        System.out.print("Nhap ma sinh vien:");
-	        maSV = scanner.nextLine();
-	        if (maSV.length() == 0) {
-	            break;
-	        } else {
-	            if (!isMaSVExist(maSV)) {
-	                System.out.println("Nhap ho ten:");
-	                String hoten = scanner.nextLine();
-	                System.out.println("Nhap diem:");
-	                double diem = scanner.nextDouble();
-	                scanner.nextLine();
-	                insert(maSV, hoten, diem);
-	            } else {
-	                System.out.println("Mã sinh viên đã tồn tại trong danh sách.");
-	            }
-	        }
-	    }
-	    
+		Scanner scanner = new Scanner(System.in);
+		while (true) {
+			String maSV = "";
+			System.out.print("Nhap ma sinh vien:");
+			maSV = scanner.nextLine();
+			if (maSV.length() == 0) {
+				break;
+			} else {
+				if (!isMaSVExist(maSV)) {
+					System.out.println("Nhap ho ten:");
+					String hoten = scanner.nextLine();
+					System.out.println("Nhap diem toan:");
+					double diemToan = scanner.nextDouble();
+					scanner.nextLine();
+					System.out.println("Nhap diem van:");
+					double diemVan = scanner.nextDouble();
+					scanner.nextLine();
+					System.out.println("Nhap diem anh:");
+					double diemAnh = scanner.nextDouble();
+					scanner.nextLine();
+					insert(maSV, hoten, diemToan, diemVan, diemAnh);
+				} else {
+					System.out.println("Mã sinh viên đã tồn tại trong danh sách.");
+				}
+			}
+		}
+		obj.ghiFile(first);
 	}
 
-
-	public void insert(String maSV, String hoten, double diem) {
-	    if (!isMaSVExist(maSV)) {
-	        Link nut = new Link(maSV, hoten, diem);
-	        nut.nextLink = first;
-	        first = nut;
-	    } else {
-	        System.out.println("Mã sinh viên đã tồn tại trong danh sách.");
-	    }
+	public void insert(String maSV, String hoten, double diemToan, double diemVan, double diemAnh) {
+		if (!isMaSVExist(maSV)) {
+			Link nut = new Link(maSV, hoten, diemToan, diemVan, diemAnh);
+			nut.nextLink = first;
+			first = nut;
+		} else {
+			System.out.println("Mã sinh viên đã tồn tại trong danh sách.");
+		}
 	}
-
-	private boolean isMaSVExist(String maSV) {
-	    Link current = first;
-	    while (current != null) {
-	        if (current.maSV.equals(maSV)) {
-	            return true;
-	        }
-	        current = current.nextLink;
-	    }
-	    return false;
-	}
-
 
 	public void printlist() {
-	    Link p = first;
-	    System.out.println("+------+---------------------+------+--------+-----------+");
-	    System.out.println("| Mã SV|       Họ và tên     | Điểm | Kết quả| Xếp loại  |");
-	    System.out.println("+------+---------------------+------+--------+-----------+");
-	    while (p != null) {
-	        System.out.printf("| %-5s| %-20s| %5.2f| %-7s| %-9s|\n", p.getMaSV(), p.getHoten(), p.getDiem(), p.getKq(), p.getXl());
-	        p = p.nextLink;
-	    }
-	    System.out.println("+------+---------------------+------+--------+-----------+");
+		Link p = first;
+		System.out.println("+------+---------------------+---------+---------+---------+--------+-----------+");
+		System.out.println("| Mã SV|       Họ và tên     |  Toán   |  Văn    |  Anh    | Kết quả| Xếp loại  |");
+		System.out.println("+------+---------------------+---------+---------+---------+--------+-----------+");
+		while (p != null) {
+			System.out.printf("| %-5s| %-20s| %8.2f| %8.2f| %8.2f| %-7s| %-10s|\n", p.getMaSV(), p.getHoten(),
+					p.getDiemToan(), p.getDiemVan(), p.getDiemAnh(), p.getKq(), p.getXl());
+			p = p.nextLink;
+		}
+		System.out.println("+------+---------------------+---------+---------+---------+--------+-----------+");
 	}
 
 	public void printif() {
 		Link p = first;
 		while (p != null) {
-			if (p.getDiem() >= 5)
-				System.out.println(p.getHoten() + " " + p.getDiem());
+			if (p.getDiemToan() >= 5 && p.getDiemVan() >= 5 && p.getDiemAnh() >= 5)
+				System.out.println(p.getHoten() + " " + p.getDiemToan() + " " + p.getDiemVan() + " " + p.getDiemAnh());
 			p = p.nextLink;
 		}
 	}
@@ -91,7 +79,7 @@ public class Linklist {
 	public void kq() {
 		Link p = first;
 		while (p != null) {
-			if (p.getDiem() >= 5)
+			if (p.getDiemToan() >= 5 && p.getDiemVan() >= 5 && p.getDiemAnh() >= 5)
 				p.setKq("dau");
 			else
 				p.setKq("rot");
@@ -102,7 +90,7 @@ public class Linklist {
 	public void xl() {
 		Link p = first;
 		while (p != null) {
-			double diemTB = (p.getDiem());
+			double diemTB = (p.getDiemToan() + p.getDiemVan() + p.getDiemAnh()) / 3;
 			if (diemTB < 5)
 				p.setXl("Kem");
 			else if (diemTB < 7)
@@ -115,45 +103,48 @@ public class Linklist {
 		}
 	}
 
-	public void chen(String maSV, String hoten, double diem) {
-		Scanner scanner = new Scanner(System.in);
-		boolean nhapLai;
-
-		do {
-			nhapLai = false;
-			if (search(maSV) != null) {
-				System.out.println("Sinh viên có mã " + maSV + " đã tồn tại trong danh sách. Không thể thêm mới.");
-				return;
-			}
-
-			insert(maSV, hoten, diem);
-			sort();
-			displaySortedResults();
-
-			System.out.print("Bạn muốn nhập lại (Y/N)? ");
-			String luaChon = scanner.nextLine();
-
-			nhapLai = luaChon.equalsIgnoreCase("Y");
-		} while (nhapLai);
-	}
-
-	public double max() {
-		Link p = first;
-		double ln = first.getDiem();
+	public void sort() {
+		Link p, q;
+		String ht, maSV;
+		double diemToan, diemVan, diemAnh;
+		p = first;
 		while (p != null) {
-			if (ln < p.getDiem())
-				ln = p.getDiem();
+			q = p.nextLink;
+			while (q != null) {
+				double diemTB1 = (p.getDiemToan() + p.getDiemVan() + p.getDiemAnh()) / 3;
+				double diemTB2 = (q.getDiemToan() + q.getDiemVan() + q.getDiemAnh()) / 3;
+				if (diemTB1 > diemTB2) {
+					ht = q.getHoten();
+					diemToan = q.getDiemToan();
+					diemVan = q.getDiemVan();
+					diemAnh = q.getDiemAnh();
+					maSV = q.getMaSV();
+					q.setMaSV(p.getMaSV());
+					q.setHoten(p.getHoten());
+					q.setDiemToan(p.getDiemToan());
+					q.setDiemVan(p.getDiemVan());
+					q.setDiemAnh(p.getDiemAnh());
+					p.setMaSV(maSV);
+					p.setHoten(ht);
+					p.setDiemToan(diemToan);
+					p.setDiemVan(diemVan);
+					p.setDiemAnh(diemAnh);
+				}
+				q = q.nextLink;
+			}
 			p = p.nextLink;
 		}
-		return ln;
 	}
 
-	public Link search(String maSV) {
+	public void search1(String hoTen) {
 		Link p = first;
-		while ((p != null) && (!p.getMaSV().equals(maSV))) {
+		while (p != null) {
+			if (p.getHoten().equalsIgnoreCase(hoTen)) {
+				System.out.println(p.getMaSV() + " - " + p.getHoten() + ": Toán - " + p.getDiemToan() + ", Văn - "
+						+ p.getDiemVan() + ", Anh - " + p.getDiemAnh());
+			}
 			p = p.nextLink;
 		}
-		return p;
 	}
 
 	public void delete(String maSV) {
@@ -170,45 +161,63 @@ public class Linklist {
 		}
 	}
 
-	public void sort() {
-		Link p, q;
-		String ht, maSV;
-		double diem;
-		p = first;
+	public double max() {
+		Link p = first;
+		double ln = (p.getDiemToan() + p.getDiemVan() + p.getDiemAnh()) / 3;
 		while (p != null) {
-			q = p.nextLink;
-			while (q != null) {
-				if (p.getHoten().compareTo(q.getHoten()) > 0) {
-					ht = q.getHoten();
-					diem = q.getDiem();
-					maSV = q.getMaSV();
-					q.setMaSV(p.getMaSV());
-					q.setHoten(p.getHoten());
-					q.setDiem(p.getDiem());
-					p.setMaSV(maSV);
-					p.setHoten(ht);
-					p.setDiem(diem);
-				}
-				q = q.nextLink;
-			}
+			double diemTB = (p.getDiemToan() + p.getDiemVan() + p.getDiemAnh()) / 3;
+			if (ln < diemTB)
+				ln = diemTB;
 			p = p.nextLink;
 		}
+		return ln;
 	}
 
-	public void search1(String hoTen) {
+	public Link search(String maSV) {
 		Link p = first;
-		while (p != null) {
-			if (p.getHoten().equalsIgnoreCase(hoTen)) {
-				System.out.println(p.getMaSV() + ";" + p.getHoten());
-			}
+		while ((p != null) && (!p.getMaSV().equals(maSV))) {
 			p = p.nextLink;
 		}
+		return p;
 	}
 
 	public void displaySortedResults() {
 		kq();
 		xl();
 		printlist();
+	}
+
+	private boolean isMaSVExist(String maSV) {
+		Link current = first;
+		while (current != null) {
+			if (current.maSV.equals(maSV)) {
+				return true;
+			}
+			current = current.nextLink;
+		}
+		return false;
+	}
+
+	public void chinhSuaThongTin(String maSV) {
+		Link p = search(maSV);
+		if (p != null) {
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Nhập thông tin mới cho sinh viên có mã SV " + maSV + ":");
+			System.out.print("Họ tên: ");
+			p.setHoten(scanner.nextLine());
+			System.out.print("Điểm Toán: ");
+			p.setDiemToan(scanner.nextDouble());
+			scanner.nextLine();
+			System.out.print("Điểm Văn: ");
+			p.setDiemVan(scanner.nextDouble());
+			scanner.nextLine();
+			System.out.print("Điểm Anh: ");
+			p.setDiemAnh(scanner.nextDouble());
+			scanner.nextLine();
+			System.out.println("Thông tin của sinh viên đã được cập nhật thành công.");
+		} else {
+			System.out.println("Không tìm thấy sinh viên có mã SV " + maSV);
+		}
 	}
 
 }

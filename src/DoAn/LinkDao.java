@@ -8,18 +8,16 @@ import java.util.ArrayList;
 
 public class LinkDao {
 	
-	public void ghiFile(Node fisrt) {
-		FileOutputStream fout = null;
-		ObjectOutputStream oos = null;
-		try {
-
-			fout = new FileOutputStream("D:\\BT PhuXuan\\CTDL và GT\\thi.bin");
-			oos = new ObjectOutputStream(fout);
-			oos.writeObject(fisrt);
-
-			System.out.println("Xong rồi!");
-		} catch (Exception ex) {
-			ex.printStackTrace();
+    public void ghiFile(Link first) {
+        FileOutputStream fout = null;
+        ObjectOutputStream oos = null;
+        try {
+            fout = new FileOutputStream("D:\\BT PhuXuan\\CTDL và GT\\thi.bin");
+            oos = new ObjectOutputStream(fout);
+            oos.writeObject(first);
+            System.out.println("Xong rồi!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
 		} finally {
 			if (fout != null) {
 				try {
@@ -39,18 +37,16 @@ public class LinkDao {
 		}
 	}
 
-	public Link docFile(String filename) {
-
-		Link fisrt = new Link();
-
-		FileInputStream fin = null;
-		ObjectInputStream ois = null;
-		try {
-			fin = new FileInputStream(filename);
-			ois = new ObjectInputStream(fin);
-			fisrt = (Link) ois.readObject();
-		} catch (Exception ex) {
-			ex.printStackTrace();
+    public Link docFile(String filename) {
+        Link first = null;
+        FileInputStream fin = null;
+        ObjectInputStream ois = null;
+        try {
+            fin = new FileInputStream(filename);
+            ois = new ObjectInputStream(fin);
+            first = (Link) ois.readObject();
+        } catch (Exception ex) {
+            ex.printStackTrace();
 		} finally {
 			if (fin != null) {
 				try {
@@ -67,9 +63,8 @@ public class LinkDao {
 					e.printStackTrace();
 				}
 			}
-
 		}
-		return fisrt;
+		return first;
 	}
 
 }

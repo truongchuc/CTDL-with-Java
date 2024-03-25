@@ -5,63 +5,82 @@ import java.io.Serializable;
 public class Node implements Serializable {
     public String maSV;
     public String ht;
-    public double diem;
+    public double diemToan;
+    public double diemVan;
+    public double diemAnh;
     public String kq;
     public String xl;
     public String getKq() {
-		return kq;
-	}
+        return kq;
+    }
 
-	public Node() {
-		super();
-	}
+    public Node() {
+        super();
+    }
 
-	public void setKq(String kq) {
-		this.kq = kq;
-	}
+    public void setKq(String kq) {
+        this.kq = kq;
+    }
 
-	public String getXl() {
-		return xl;
-	}
+    public String getXl() {
+        return xl;
+    }
 
-	public void setXl(String xl) {
-		this.xl = xl;
-	}
+    public void setXl(String xl) {
+        this.xl = xl;
+    }
 
-	public Node left;
+    public Node left;
     public Node right;
     
 
-    public Node(String masv, String hoten, double diem) {
+    public Node(String masv, String hoten, double diemToan, double diemVan, double diemAnh) {
         this.maSV = masv;
         this.ht = hoten;
-        this.diem = diem;
+        this.diemToan = diemToan;
+        this.diemVan = diemVan;
+        this.diemAnh = diemAnh;
         this.left = null;
         this.right = null;
     }
 
-	public String getMaSV() {
-		return maSV;
-	}
+    public String getMaSV() {
+        return maSV;
+    }
 
-	public void setMaSV(String maSV) {
-		this.maSV = maSV;
-	}
+    public void setMaSV(String maSV) {
+        this.maSV = maSV;
+    }
 
-	public String getHt() {
-		return ht;
-	}
+    public String getHt() {
+        return ht;
+    }
 
-	public void setHt(String ht) {
-		this.ht = ht;
-	}
+    public void setHt(String ht) {
+        this.ht = ht;
+    }
 
-	public double getDiem() {
-		return diem;
-	}
+    public double getDiemToan() {
+        return diemToan;
+    }
 
-	public void setDiem(double diem) {
-		this.diem = diem;
-	}
+    public void setDiemToan(double diemToan) {
+        this.diemToan = diemToan;
+    }
+
+    public double getDiemVan() {
+        return diemVan;
+    }
+
+    public void setDiemVan(double diemVan) {
+        this.diemVan = diemVan;
+    }
+
+    public double getDiemAnh() {
+        return diemAnh;
+    }
+
+    public void setDiemAnh(double diemAnh) {
+        this.diemAnh = diemAnh;
+    }
 }
-
